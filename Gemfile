@@ -11,3 +11,5 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'timecop'
+gem 'minitest-around'
+gem 'database_cleaner'

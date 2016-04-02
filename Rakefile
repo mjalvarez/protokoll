@@ -33,5 +33,11 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = false
 end
 
+Rake::TestTask.new(:concurrency_test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/**/concurrency_test.rb'
+  t.verbose = false
+end
 
 task :default => :test

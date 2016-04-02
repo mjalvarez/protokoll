@@ -405,7 +405,6 @@ class ProtokollTest < ActiveSupport::TestCase
       end
     end
   end
-
 end
 
 

@@ -4,15 +4,15 @@ module Protokoll
   class Counter
     def self.next(object, options)
       element = Models::CustomAutoIncrement.find_or_create_by(counter_model_name: object.class.to_s.underscore)
+      element.with_lock do
+        element.counter = options[:start] if outdated?(element, options) || element.counter == 0
+        element.counter += 1
 
-      element.counter = options[:start] if outdated?(element, options) || element.counter == 0
-      element.counter += 1
+        element.touch unless element.changed?
+        element.save! if element.changed?
 
-      element.touch unless element.changed?
-      element.save! if element.changed?
-
-      element.save!
-
+        element.save!
+      end
       Formater.new.format(element.counter, options)
     end
 
